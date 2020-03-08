@@ -77,14 +77,7 @@ public class DepartmentController {
 
         departmentDao.removeWorkerFromDepartment(worker);
 
-        Department department = departmentDao.findByIdWithDeps(departmentId);
-        List<Worker> workersFromDepartment = department.getWorkersByIdDepartment();
-        model.addAttribute("workersFromDepartment", workersFromDepartment);
-
-        List<Worker> workersWithoutDepartment = departmentDao.getWorkerWithoutDepartment();
-        model.addAttribute("workersWithoutDepartment", workersWithoutDepartment);
-
-        return "editDepartment";
+        return "redirect:/department/enterTheDepartment/" + departmentId + "/";
     }
 
     @GetMapping("/enterTheDepartment/{departmentId}/addWorkerInDepartment")
@@ -95,14 +88,7 @@ public class DepartmentController {
 
         departmentDao.addWorkerInDepartment(worker);
 
-        Department department = departmentDao.findByIdWithDeps(departmentId);
-        List<Worker> workersFromDepartment = department.getWorkersByIdDepartment();
-        model.addAttribute("workersFromDepartment", workersFromDepartment);
-
-        List<Worker> workersWithoutDepartment = departmentDao.getWorkerWithoutDepartment();
-        model.addAttribute("workersWithoutDepartment", workersWithoutDepartment);
-
-        return "editDepartment";
+        return "redirect:/department/enterTheDepartment/" + departmentId + "/";
     }
 
 }
