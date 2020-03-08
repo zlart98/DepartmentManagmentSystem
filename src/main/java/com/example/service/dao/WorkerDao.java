@@ -12,6 +12,5 @@ public interface WorkerDao {
     Worker findByIdWithWork(Long id);
     Worker findById(Long idWorker);
     void delete(Worker worker);
-    void save(Worker worker);
-    void update(Worker worker);
+    void saveOrUpdate(Worker worker);
 }

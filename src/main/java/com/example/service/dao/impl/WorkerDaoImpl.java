@@ -72,22 +72,18 @@ public class WorkerDaoImpl implements WorkerDao {
     }*/
 
     @Override
-    public void save(Worker worker) {
+    public void saveOrUpdate(Worker worker) {
         try(Session session  = MySqlSessionFactoryUtil.openSession();) {
-            session.save(worker);
-            session.getTransaction().commit();
+            if (worker.getIdWorker() == null) {
+                session.save(worker);
+                session.getTransaction().commit();
+            }else {
+                session.update(worker);
+                session.getTransaction().commit();
+            }
         }
 
     }
-
-    @Override
-    public void update(Worker worker) {
-        try(Session session  = MySqlSessionFactoryUtil.openSession();) {
-            session.update(worker);
-            session.getTransaction().commit();
-        }
-    }
-
 }
 
 

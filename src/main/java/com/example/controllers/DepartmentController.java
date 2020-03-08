@@ -72,22 +72,37 @@ public class DepartmentController {
     }
 
     @GetMapping("/enterTheDepartment/{departmentId}/removeWorkerFromDepartment")
-        public String removeWorkerFromDepartment(@PathVariable("departmentId") Long departmentId, @RequestParam("idWorker") Long idWorker){
+        public String removeWorkerFromDepartment(@PathVariable("departmentId") Long departmentId, @RequestParam("idWorker") Long idWorker, Model model){
         Worker worker = workerDao.findByIdWithWork(idWorker);
 
         departmentDao.removeWorkerFromDepartment(worker);
-        return "redirect:/department/enterTheDepartment/" + departmentId;
+
+        Department department = departmentDao.findByIdWithDeps(departmentId);
+        List<Worker> workersFromDepartment = department.getWorkersByIdDepartment();
+        model.addAttribute("workersFromDepartment", workersFromDepartment);
+
+        List<Worker> workersWithoutDepartment = departmentDao.getWorkerWithoutDepartment();
+        model.addAttribute("workersWithoutDepartment", workersWithoutDepartment);
+
+        return "editDepartment";
     }
 
     @GetMapping("/enterTheDepartment/{departmentId}/addWorkerInDepartment")
-        public String addWorkerInDepartment(@PathVariable("departmentId") Long departmentId, @RequestParam("idWorker") Long idWorker){
+        public String addWorkerInDepartment(@PathVariable("departmentId") Long departmentId, @RequestParam("idWorker") Long idWorker, Model model){
         Worker worker = new Worker();
         worker.setDepartmentByIdDepartment(departmentDao.findByIdWithDeps(departmentId));
         worker.setIdWorker(idWorker);
 
         departmentDao.addWorkerInDepartment(worker);
 
-        return "redirect:/department/enterTheDepartment/" + departmentId;
+        Department department = departmentDao.findByIdWithDeps(departmentId);
+        List<Worker> workersFromDepartment = department.getWorkersByIdDepartment();
+        model.addAttribute("workersFromDepartment", workersFromDepartment);
+
+        List<Worker> workersWithoutDepartment = departmentDao.getWorkerWithoutDepartment();
+        model.addAttribute("workersWithoutDepartment", workersWithoutDepartment);
+
+        return "editDepartment";
     }
 
 }
