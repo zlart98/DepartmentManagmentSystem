@@ -1,9 +1,9 @@
 package com.example.service.dao.impl;
 
-import com.example.service.dao.DepartmentDao;
-import com.example.service.dao.WorkerDao;
 import com.example.entity.Department;
 import com.example.entity.Worker;
+import com.example.service.dao.DepartmentDao;
+import com.example.service.dao.WorkerDao;
 import com.example.utils.MySqlSessionFactoryUtil;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;

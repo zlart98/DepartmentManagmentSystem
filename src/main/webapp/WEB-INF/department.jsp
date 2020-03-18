@@ -9,9 +9,9 @@
 
 <body>
 
-<%--<jsp:include page="../../webapp/menu.jsp"></jsp:include>--%>
+<jsp:include page="menu.jsp"></jsp:include>
 
-<%--<span style="color:red"><p><strong>${inputeFormatException}</strong></p></span>--%>
+<span style="color:red"><p><strong>${inputFormatException}</strong></p></span>
 <div>
     <div>
         <p><strong>Создание отдела</strong></p>

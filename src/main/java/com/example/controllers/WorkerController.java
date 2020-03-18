@@ -2,6 +2,7 @@ package com.example.controllers;
 
 import com.example.entity.Department;
 import com.example.entity.Worker;
+import com.example.exception.InputFormanException;
 import com.example.service.dao.DepartmentDao;
 import com.example.service.dao.WorkerDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,13 +39,17 @@ public class WorkerController {
     public String saveOrUpdateWorker(@RequestParam(value = "idWorker", required = false) Long idWorker,
                               @RequestParam(value = "name") String name,
                               @RequestParam(value = "position") String position,
+                              @RequestParam(value = "workposition") String workposition,
                               @RequestParam(value = "idDepartment", required = false) Long idDepartment){
 
+        if (name.matches("^-?\\d+$") || position.matches("^-?\\d+$")) {
+            throw new InputFormanException("Неверный ввод");
+        }
         Worker worker = new Worker();
         worker.setIdWorker(idWorker);
         worker.setName(name);
         worker.setPosition(position);
-        worker.setWorkposition(position);
+        worker.setWorkposition(workposition);
         if (idDepartment != null){
             Department department = departmentDao.findById(idDepartment);
             if (department != null) {

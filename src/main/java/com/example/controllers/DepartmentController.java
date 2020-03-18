@@ -10,8 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.ServletException;
-import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -25,7 +23,7 @@ public class DepartmentController {
     private WorkerDao workerDao;
 
     @GetMapping
-    public String department(Model model) throws ServletException, IOException {
+    public String department(Model model) {
         List<Department> departments = departmentDao.findAll();
         model.addAttribute("departmentList", departments);
         return "department";
