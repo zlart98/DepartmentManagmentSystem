@@ -25,6 +25,7 @@
         <input type="text" name="position" placeholder="Должность" />
         <input type="text" name="workposition" placeholder="Рабочее место" />
         <input type="text" name="idDepartment" placeholder="Номер департамента" />
+        <input type="hidden" value="${_csrf.token}" name="_csrf">
         <button type="submit">Создать</button>
     </form>
 </div>
@@ -53,6 +54,7 @@
                          <option>${department.idDepartment}</option>
                          </c:forEach>
                      </select>--%>
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                     <button type="submit">Редактирование</button>
                 </form></td>
 
