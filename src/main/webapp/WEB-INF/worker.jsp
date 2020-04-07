@@ -7,6 +7,8 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="sec"
+           uri="http://www.springframework.org/security/tags"%>
 <html>
 <head>
     <title>Worker</title>
@@ -17,6 +19,7 @@
 <span style="color:red"><p><strong>${inputFormatException}</strong></p></span>
 
 <div>
+    <sec:authorize access="hasRole('ADMIN')">
     <div>
         <p><strong>Создание работника</strong></p>
     </div>
@@ -28,6 +31,7 @@
         <input type="hidden" value="${_csrf.token}" name="_csrf">
         <button type="submit">Создать</button>
     </form>
+    </sec:authorize>
 </div>
 <div>
     <table>
@@ -43,6 +47,7 @@
                 <td><p>${worker.position}<p></td>
                 <td><p>${worker.workposition}<p></td>
                 <td><p>${worker.departmentByIdDepartment.idDepartment}<p></td>
+                <sec:authorize access="hasRole('ADMIN')">
                 <td><p><a href="/worker/removeWorker?idWorker=${worker.idWorker}">Убрать</a><p></td>
                 <td><form action="/worker/saveOrUpdate?idWorker=${worker.idWorker}" method="post" accept-charset="utf-8">
                     <input type="text" name="name" placeholder="Имя" />
@@ -57,7 +62,7 @@
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                     <button type="submit">Редактирование</button>
                 </form></td>
-
+                </sec:authorize>
             </tr>
         </c:forEach>
     </table>

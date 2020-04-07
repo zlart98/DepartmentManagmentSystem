@@ -17,8 +17,8 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("user").password("user").roles("USER");
-        auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ADMIN");
+        auth.inMemoryAuthentication().withUser("user").password("{noop}user").roles("USER");
+        auth.inMemoryAuthentication().withUser("admin").password("{noop}admin").roles("ADMIN");
     }
 
     @Override
@@ -29,13 +29,9 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
         http.addFilterBefore(filter, CsrfFilter.class);
 
         http.authorizeRequests()
-                .antMatchers("/department/*").hasRole("ADMIN")
-                .antMatchers("/department").hasRole("USER")
-                .antMatchers("/department/**").hasRole("ADMIN")
-                .antMatchers("/worker/*").hasRole("ADMIN")
-                .antMatchers("/worker").hasRole("USER")
-                .and().formLogin()
-                .and().formLogin().defaultSuccessUrl("/", false).and().logout();
+                .antMatchers("/department").hasAnyRole("USER", "ADMIN")
+                .antMatchers("/worker").hasAnyRole("USER", "ADMIN").and().logout()
+                .and().formLogin().defaultSuccessUrl("/", false);
 
     }
 
