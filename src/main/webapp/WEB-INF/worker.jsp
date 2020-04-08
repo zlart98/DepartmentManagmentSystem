@@ -53,12 +53,11 @@
                     <input type="text" name="name" placeholder="Имя" />
                     <input type="text" name="position" placeholder="Должность" />
                     <input type="text" name="workposition" placeholder="Место" />
-
-                  <%--  <select name="department">
+                  <select name="idDepartment">
                          <c:forEach var="department" items="${departmentList}">
                          <option>${department.idDepartment}</option>
                          </c:forEach>
-                     </select>--%>
+                     </select>
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                     <button type="submit">Редактирование</button>
                 </form></td>

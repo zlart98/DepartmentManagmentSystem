@@ -22,8 +22,8 @@
         <c:forEach var="worker" items="${workersFromDepartment}">
             <tr>
                 <td><p>${worker.name}<p></td>
-                <td><p>${worker.workposition}<p></td>
                 <td><p>${worker.position}<p></td>
+                <td><p>${worker.workposition}<p></td>
                 <sec:authorize access="hasRole('ADMIN')">
                 <td><p><a href="removeWorkerFromDepartment?idWorker=${worker.idWorker}">Удалить работника</a><p></td>
                 </sec:authorize>
@@ -41,8 +41,8 @@
         <c:forEach var="worker" items="${workersWithoutDepartment}">
             <tr>
                 <td><p>${worker.name}<p></td>
-                <td><p>${worker.position}<p></td>
                 <td><p>${worker.workposition}<p></td>
+                <td><p>${worker.position}<p></td>
                 <sec:authorize access="hasRole('ADMIN')">
                 <td><p><a href="addWorkerInDepartment?idWorker=${worker.idWorker}">Добавить</a><p></td>
                 </sec:authorize>
