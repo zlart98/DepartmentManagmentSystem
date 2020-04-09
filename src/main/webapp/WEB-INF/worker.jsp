@@ -12,6 +12,8 @@
 <html>
 <head>
     <title>Worker</title>
+    <link rel="stylesheet" type="text/css" href="static/style.css" />
+
 </head>
 <body>
 <jsp:include page="menu.jsp"></jsp:include>

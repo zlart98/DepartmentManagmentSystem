@@ -43,15 +43,13 @@
             </li>
             <sec:authorize access="isAuthenticated()">
                 <li class="nav-item">
-                    <a class="nav-link" href="/logout">Logout</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="/logout"><span style="color:limegreen">[ <sec:authentication property="name"/> ]</span></a>
                 </li>
             </sec:authorize>
         </ul>
-
-
+        <sec:authorize access="isAuthenticated()">
+        <div class="navbar-text"><a class="nav-link" href="/logout">Logout</a></div>
+        </sec:authorize>
     </div>
 </nav>
 

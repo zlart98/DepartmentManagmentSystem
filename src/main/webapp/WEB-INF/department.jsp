@@ -5,6 +5,7 @@
 
 <html>
 <head>
+    <style><%@include file="/WEB-INF/static/style.css"%></style>
     <title>Department</title>
 </head>
 
@@ -14,41 +15,59 @@
 <span style="color:red"><p><strong>${inputFormatException}</strong></p></span>
 <sec:authorize access="hasRole('ADMIN')">
 <div>
-    <div>
-        <p><strong>Создание отдела</strong></p>
-    </div>
 
-    <form action="/department/saveOrUpdate" method="post" accept-charset="utf-8">
-        <input type="text" name="name" placeholder="Название отдела" />
-        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-        <button type="submit">Создать</button>
+    <p class="font-weight-bold">Create department</p>
+
+    <form class="form-inline" action="/department/saveOrUpdate" method="post" accept-charset="utf-8">
+        <div class="form-group mx-sm-0.8 mb-2">
+            <p><input type="text" name="name" placeholder="Name" class="form-control"></p>
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+            <p><button type="submit" class="btn btn-primary mb-0.8">Create</button></p>
+        </div>
     </form>
+
+<%--    <form action="/department/saveOrUpdate" method="post" accept-charset="utf-8">--%>
+<%--        <input type="text" name="name" placeholder="Название отдела" />--%>
+<%--        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />--%>
+<%--        <button type="submit">Создать</button>--%>
+<%--    </form>--%>
 </div>
 </sec:authorize>
 <div>
-    <p><strong>Список отделов</strong></p>
+    <p class="font-weight-bold" style="width: 200px;">Department list</p>
 </div>
 <div>
-    <table>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <p><th scope="col">Name</th></p>
+        <th scope="col">Number</th>
+    </tr>
+    </thead>
+    <tbody>
+    <c:forEach var="department" items="${departmentList}">
         <tr>
-            <th>Название</th>
-            <th>Номер</th>
-        </tr>
-        <c:forEach var="department" items="${departmentList}">
-            <tr>
-                <td><p><a href="/department/enterTheDepartment/${department.idDepartment}/">${department.departmentName}</a><p></td>
-                <td><p><c:out value="${department.idDepartment}"></c:out><p></td>
-                <sec:authorize access="hasRole('ADMIN')">
-                <td><p><a href="/department/removeDepartment?idDepartment=${department.idDepartment}">Удаление отдела</a><p></td>
-                <td><form action="/department/saveOrUpdate?idDepartment=${department.idDepartment}" method="post" accept-charset="utf-8">
-                    <input type="text" name="name" placeholder="Название отдела" />
+            <td><p><a href="/department/enterTheDepartment/${department.idDepartment}/">${department.departmentName}</a><p></td>
+            <td><p><c:out value="${department.idDepartment}"></c:out><p></td>
+            <sec:authorize access="hasRole('ADMIN')">
+<%--                <td><p><a href="/department/removeDepartment?idDepartment=${department.idDepartment}">Удаление отдела</a><p></td>--%>
+                <td><form action="/department/removeDepartment?idDepartment=${department.idDepartment}" method="post" accept-charset="utf-8">
+                    <button class="btn btn-primary" type="submit">Remove</button>
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                    <button type="submit">Редактирование</button>
+
                 </form></td>
-                </sec:authorize>
-            </tr>
-        </c:forEach>
-    </table>
+                <td><form class="form-inline" action="/department/saveOrUpdate?idDepartment=${department.idDepartment}" method="post" accept-charset="utf-8">
+                    <div class="form-group mx-sm-2 mb-3">
+                    <input type="text" name="name" placeholder="Name" class="form-control" />
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                        <button type="submit" class="btn btn-primary mb-0.8">Edit</button>
+                    </div>
+                </form></td>
+            </sec:authorize>
+        </tr>
+    </c:forEach>
+    </tbody>
+</table>
 </div>
 </body>
 </html>

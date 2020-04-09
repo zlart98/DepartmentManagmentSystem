@@ -48,7 +48,7 @@ public class DepartmentController {
 
     }
 
-    @GetMapping("/removeDepartment")
+    @PostMapping("/removeDepartment")
     public String removeDepartment(@RequestParam(value = "idDepartment", required = false) Long idDepartment) {
         Department department = new Department();
         department.setIdDepartment(idDepartment);
