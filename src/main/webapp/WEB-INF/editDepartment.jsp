@@ -38,7 +38,6 @@
 </div>
     <table class="table table-striped">
         <p><strong>Workers Without Department</strong></p>
-
         <tr>
             <th scope="col">Имя</th>
             <th scope="col">Должность</th>

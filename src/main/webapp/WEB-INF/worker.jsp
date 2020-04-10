@@ -36,12 +36,12 @@
     </sec:authorize>
 </div>
 <div>
-    <table>
+    <table class="table table-striped">
         <tr>
-            <th>Имя</th>
-            <th>Должность</th>
-            <th>Рабочее место</th>
-            <th>Номер департамента</th>
+            <th scope="col">Имя</th>
+            <th scope="col">Должность</th>
+            <th scope="col">Рабочее место</th>
+            <th scope="col">Номер департамента</th>
         </tr>
         <c:forEach var="worker" items="${workerList}">
             <tr>
