@@ -40,7 +40,7 @@
 <table class="table table-striped">
     <thead>
     <tr>
-        <p><th scope="col">Name</th></p>
+        <th scope="col">Name</th>
         <th scope="col">Number</th>
     </tr>
     </thead>
@@ -54,14 +54,22 @@
                 <td><form action="/department/removeDepartment?idDepartment=${department.idDepartment}" method="post" accept-charset="utf-8">
                     <button class="btn btn-primary" type="submit">Remove</button>
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-
                 </form></td>
-                <td><form class="form-inline" action="/department/saveOrUpdate?idDepartment=${department.idDepartment}" method="post" accept-charset="utf-8">
-                    <div class="form-group mx-sm-2 mb-3">
-                    <input type="text" name="name" placeholder="Name" class="form-control" />
-                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                        <button type="submit" class="btn btn-primary mb-0.8">Edit</button>
-                    </div>
+
+                <td>
+                    <form class="form-inline" action="/department/saveOrUpdate?idDepartment=${department.idDepartment}"
+                          method="post" accept-charset="utf-8">
+                        <div class="form-row align-items-center">
+                            <div class="col-auto">
+                                <input type="text" name="name" placeholder="Name" class="form-control"/>
+                            </div>
+                            <div class="col-auto">
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                <button type="submit" class="btn btn-primary mb-0.8">Edit</button>
+                        </div>
                 </form></td>
             </sec:authorize>
         </tr>

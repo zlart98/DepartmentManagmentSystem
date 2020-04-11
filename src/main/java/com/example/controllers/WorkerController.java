@@ -62,7 +62,7 @@ public class WorkerController {
         return "redirect:/worker";
     }
 
-    @GetMapping("/removeWorker")
+    @PostMapping("/removeWorker")
     public String removeWorker(@RequestParam("idWorker") Long idWorker){
         Worker worker = workerDao.findById(idWorker);
         if (worker != null){

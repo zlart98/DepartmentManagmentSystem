@@ -25,11 +25,15 @@
         <tbody>
         <c:forEach var="worker" items="${workersFromDepartment}">
             <tr>
-                <td><p>${worker.name}<p></td>
-                <td><p>${worker.position}<p></td>
-                <td><p>${worker.workposition}<p></td>
+                <td>${worker.name}</td>
+                <td>${worker.position}</td>
+                <td>${worker.workposition}</td>
                 <sec:authorize access="hasRole('ADMIN')">
-                    <td><p><a href="removeWorkerFromDepartment?idWorker=${worker.idWorker}">Удалить работника</a><p></td>
+<%--                    <td><p><a href="removeWorkerFromDepartment?idWorker=${worker.idWorker}">Удалить работника</a><p></td>--%>
+                    <td><form action="removeWorkerFromDepartment?idWorker=${worker.idWorker}" method="post" accept-charset="utf-8">
+                        <button class="btn btn-primary" type="submit">Remove</button>
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                    </form></td>
                 </sec:authorize>
             </tr>
         </c:forEach>
@@ -45,11 +49,15 @@
         </tr>
         <c:forEach var="worker" items="${workersWithoutDepartment}">
             <tr>
-                <td><p>${worker.name}<p></td>
-                <td><p>${worker.position}<p></td>
-                <td><p>${worker.workposition}<p></td>
+                <td>${worker.name}</td>
+                <td>${worker.position}</td>
+                <td>${worker.workposition}</td>
                 <sec:authorize access="hasRole('ADMIN')">
-                <td><p><a href="addWorkerInDepartment?idWorker=${worker.idWorker}">Добавить</a><p></td>
+<%--                <td><p><a href="addWorkerInDepartment?idWorker=${worker.idWorker}">Добавить</a><p></td>--%>
+                    <td><form action="addWorkerInDepartment?idWorker=${worker.idWorker}" method="post" accept-charset="utf-8">
+                        <button class="btn btn-primary" type="submit">Add</button>
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                    </form></td>
                 </sec:authorize>
             </tr>
         </c:forEach>

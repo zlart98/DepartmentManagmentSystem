@@ -69,7 +69,7 @@ public class DepartmentController {
         return "editDepartment";
     }
 
-    @GetMapping("/enterTheDepartment/{departmentId}/removeWorkerFromDepartment")
+    @PostMapping("/enterTheDepartment/{departmentId}/removeWorkerFromDepartment")
         public String removeWorkerFromDepartment(@PathVariable("departmentId") Long departmentId, @RequestParam("idWorker") Long idWorker, Model model){
         Worker worker = workerDao.findByIdWithWork(idWorker);
 
@@ -78,7 +78,7 @@ public class DepartmentController {
         return "redirect:/department/enterTheDepartment/" + departmentId + "/";
     }
 
-    @GetMapping("/enterTheDepartment/{departmentId}/addWorkerInDepartment")
+    @PostMapping("/enterTheDepartment/{departmentId}/addWorkerInDepartment")
         public String addWorkerInDepartment(@PathVariable("departmentId") Long departmentId, @RequestParam("idWorker") Long idWorker, Model model){
         Worker worker = new Worker();
         worker.setDepartmentByIdDepartment(departmentDao.findByIdWithDeps(departmentId));

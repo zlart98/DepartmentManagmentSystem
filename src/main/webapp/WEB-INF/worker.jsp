@@ -12,7 +12,7 @@
 <html>
 <head>
     <title>Worker</title>
-    <link rel="stylesheet" type="text/css" href="static/style.css" />
+    <style><%@include file="/WEB-INF/static/style.css"%></style>
 
 </head>
 <body>
@@ -25,13 +25,25 @@
     <div>
         <p><strong>Создание работника</strong></p>
     </div>
-    <form action="/worker/saveOrUpdate" method="post" accept-charset="utf-8">
-        <input type="text" name="name" placeholder="Имя" />
-        <input type="text" name="position" placeholder="Должность" />
-        <input type="text" name="workposition" placeholder="Рабочее место" />
-        <input type="text" name="idDepartment" placeholder="Номер департамента" />
+    <form class="form-inline" action="/worker/saveOrUpdate" method="post" accept-charset="utf-8">
+        <div class="form-row align-items-center">
+        <div class="col-auto">
+            <p><input type="text" name="name" placeholder="Имя" class="form-control" /></p>
+        </div>
+        <div class="col-auto">
+            <p><input type="text" name="position" placeholder="Должность" class="form-control" /></p>
+        </div>
+        <div class="col-auto">
+            <p><input type="text" name="workposition" placeholder="Рабочее место" class="form-control" /></p>
+        </div>
+        <div class="col-auto">
+            <p><input type="text" name="idDepartment" aria-describedby="inputGroup-sizing-sm" placeholder="Номер департамента" class="form-control" /></p>
+        </div>
         <input type="hidden" value="${_csrf.token}" name="_csrf">
-        <button type="submit">Создать</button>
+        </div>
+        <div class="col-auto">
+            <p><button type="submit" class="btn btn-primary">Create</button></p>
+        </div>
     </form>
     </sec:authorize>
 </div>
@@ -45,24 +57,53 @@
         </tr>
         <c:forEach var="worker" items="${workerList}">
             <tr>
-                <td><p>${worker.name}<p></td>
-                <td><p>${worker.position}<p></td>
-                <td><p>${worker.workposition}<p></td>
-                <td><p>${worker.departmentByIdDepartment.idDepartment}<p></td>
+                <td>${worker.name}</td>
+                <td>${worker.position}</td>
+                <td>${worker.workposition}</td>
+                <td>${worker.departmentByIdDepartment.idDepartment}</td>
                 <sec:authorize access="hasRole('ADMIN')">
-                <td><p><a href="/worker/removeWorker?idWorker=${worker.idWorker}">Убрать</a><p></td>
-                <td><form action="/worker/saveOrUpdate?idWorker=${worker.idWorker}" method="post" accept-charset="utf-8">
-                    <input type="text" name="name" placeholder="Имя" />
-                    <input type="text" name="position" placeholder="Должность" />
-                    <input type="text" name="workposition" placeholder="Место" />
-                  <select name="idDepartment">
-                         <c:forEach var="department" items="${departmentList}">
-                         <option>${department.idDepartment}</option>
-                         </c:forEach>
-                     </select>
-                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                    <button type="submit">Редактирование</button>
-                </form></td>
+                    <td><form action="/worker/removeWorker?idWorker=${worker.idWorker}" method="post" accept-charset="utf-8">
+                        <button class="btn btn-primary" type="submit">Remove</button>
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                    </form></td>
+<%--                <td><p><a href="/worker/removeWorker?idWorker=${worker.idWorker}">Убрать</a><p></td>--%>
+<%--                <td><form action="/worker/saveOrUpdate?idWorker=${worker.idWorker}" method="post" accept-charset="utf-8">--%>
+<%--                    <input type="text" name="name" placeholder="Имя" />--%>
+<%--                    <input type="text" name="position" placeholder="Должность" />--%>
+<%--                    <input type="text" name="workposition" placeholder="Место" />--%>
+<%--                  <select name="idDepartment">--%>
+<%--                         <c:forEach var="department" items="${departmentList}">--%>
+<%--                         <option>${department.idDepartment}</option>--%>
+<%--                         </c:forEach>--%>
+<%--                     </select>--%>
+<%--                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />--%>
+<%--                    <button type="submit">Edit</button>--%>
+<%--                </form></td>--%>
+
+                <td><form class="form-inline" action="/worker/saveOrUpdate?idWorker=${worker.idWorker}" method="post" accept-charset="utf-8">
+                        <div class="form-row align-items-center">
+                            <div class="col-auto">
+                                <p><input type="text" name="name" placeholder="Имя" class="form-control" /></p>
+                            </div>
+                            <div class="col-auto">
+                                <p><input type="text" name="position" placeholder="Должность" class="form-control" /></p>
+                            </div>
+                            <div class="col-auto">
+                                <p><input type="text" name="workposition" placeholder="Рабочее место" class="form-control" /></p>
+                            </div>
+<%--                            <div>--%>
+<%--                            <select class="selectpicker form-control" name="idDepartment">--%>
+<%--                                <c:forEach var="department" items="${departmentList}">--%>
+<%--                                    <option>${department.idDepartment}</option>--%>
+<%--                                </c:forEach>--%>
+<%--                            </select>--%>
+<%--                            </div>--%>
+                            <input type="hidden" value="${_csrf.token}" name="_csrf">
+                        </div>
+                        <div class="col-auto">
+                            <p><button type="submit" class="btn btn-primary">Edit</button></p>
+                        </div>
+                    </form></td>
                 </sec:authorize>
             </tr>
         </c:forEach>
